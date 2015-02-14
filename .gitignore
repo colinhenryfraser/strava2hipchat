@@ -1,0 +1,5 @@
+# Config Files (Contain API Keys)
+*.conf
+
+# Cache Files
+*.cache

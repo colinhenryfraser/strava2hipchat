@@ -1,0 +1,6 @@
+{
+	"strava_key":	"<Strava API key>",
+	"hipchat_key":	"<Hipchat API key>",
+	"hipchat_room":	"<Hipchat room>",
+	"hipchat_user":	"Strava"
+}
