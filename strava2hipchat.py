@@ -6,6 +6,19 @@
 ##
 
 import json
+from stravalib import client
+
+class Strava:
+
+	#
+	# Set the Strava key
+	def __init__(self, strava_key):
+		self.strava_key = strava_key
+				
+	def getStrava(self, time):
+		
+
+
 
 #
 # Get the conf from JSON file
