@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 #
 # Script to pull activities from Stava and send to Hipchat
@@ -7,6 +7,7 @@
 import json
 from stravalib import Client, unithelper
 import datetime
+import urllib2
 
 #
 # Strava Parent Class
@@ -41,12 +42,22 @@ class Strava2HipChat(Strava):
 	def __init__(self, strava_key, hipchat_key, hipchat_room, hipchat_user="Strava"):
 		#
 		# HipChat Stuff
-		self.hipchat_key = hipchat_key
+		self.hipchat_key = str(hipchat_key)
 		self.hipchat_room = hipchat_room
 		self.hipchat_user = hipchat_user
 		#
 		# Strava Key
 		Strava.__init__(self, strava_key)
+
+
+        def send_message(self, message):
+		header = {'content-type':'application/json'}
+                url = "https://api.hipchat.com/v2/room/" + str(self.hipchat_room) + "/notification"
+                data = json.dumps({"message":message})
+                req = urllib2.Request(url+"?auth_token="+self.hipchat_key, data, header)
+                res = urllib2.urlopen(req)
+                return res.read()
+
 	#
 	# Send the Strava stuff to HipChat
 	####
@@ -73,6 +84,7 @@ class Strava2HipChat(Strava):
 				#
 				# Send to HipChat
 				print message
+				self.send_message(message)
 				#
 				# Record the activity id in cache (don't know if cache is the right name for this)
 				open('strava.cache','a').write(str(activity.id) + "\n")
