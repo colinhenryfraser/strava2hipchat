@@ -1,4 +1,4 @@
-#!/usr/bin/ruby
+##!/usr/bin/ruby
 
 ##
 # Script to pull activities from Stava and send to Hipchat
