@@ -1,2 +1,2 @@
-# Strava2Hipchat
+## Strava2Hipchat
 
